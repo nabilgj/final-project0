@@ -46,7 +46,7 @@ public class ProjectDriver {
                delete("/userdelete/{id}", uc.handleDeleteUser);
             });
             path("banks", () -> {
-                post("/", bc.handleDepositAmount);
+                post("/deposit", bc.handleDepositAmount);
             });
         });
 

@@ -15,13 +15,14 @@ public class BankingService {
        this.bd = bd;
    }
 
-   public void addDeposit(int amount, User u){
+   public void addDeposit(int amount, int id){
+      Banking bank = new Banking();
 
-       Date d = new Date(Instant.now().toEpochMilli());
+      if (amount != 0) {
+         Banking deposit = new Banking(0, amount, bank.getBalance() + amount, id);
+         bank.setPrevTransaction(amount);
+      }
 
-       Banking b = new Banking(0, d, amount, u);
-
-       bd.depositAmount(b);
    }
 
 }

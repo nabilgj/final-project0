@@ -3,10 +3,7 @@ package com.example.dao;
 import com.example.models.Banking;
 import com.example.util.ConnectionSingleton;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class BankingDao implements IBankingDao {
@@ -20,16 +17,27 @@ public class BankingDao implements IBankingDao {
         // we call our stored procedure
         try {
             // we must turn off auto commit
-            c.setAutoCommit(false);
+//            c.setAutoCommit(false);
 
-            String sql = "call banking_transaction(?, ?, ?)";
-            CallableStatement call = c.prepareCall(sql);
+            String sql = "insert into banking(balance, prevTransaction, users_fk) values " +
+                    "('" + b.getBalance() + "', '" + b.getPrevTransaction() + "', '" + b.getUsers_fk() + "')";
 
-            call.setDate(1, (Date) b.getTransaction_date());
-            call.setInt(2, b.getTransaction());
-            call.setInt(3, b.getUserTransaction().getUser_id());
+            try {
+                Statement s = c.createStatement();
 
-            call.execute();
+                // we use execute bcox insert into does not return anything
+                s.execute(sql);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+//
+//            String sql = "call banking_transaction(?, ?, ?)";
+//            CallableStatement call = c.prepareCall(sql);
+//            call.setInt(2, b.getTransaction());
+//            call.setInt(3, b.getUserTransaction().getUser_id());
+//
+//            call.execute();
 
             // we need to set commut back to true to commit
             c.setAutoCommit(true);

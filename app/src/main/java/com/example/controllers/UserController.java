@@ -1,5 +1,6 @@
 package com.example.controllers;
 
+import com.example.models.Banking;
 import com.example.models.LoginObjet;
 import com.example.models.RegisterObject;
 import com.example.models.User;
@@ -44,6 +45,9 @@ public class UserController {
             // we could also, if the user is logged in successfully, setup a session for them
             ctx.req.getSession().setAttribute("loggedIn", u.getEmail());
             ctx.req.getSession().setAttribute("uid", ""+u.getUser_id());
+
+//            Banking bank = new Banking();
+//            bank.setUsers_fk(u.getUser_id());
 
 
             ctx.result(om.writeValueAsString("user logged in by " + u.getEmail()));

@@ -24,13 +24,18 @@ public class BankingController {
             ctx.status(401);
             ctx.result("You need to log in to deposit");
         } else {
-            int userId = Integer.parseInt((String) ctx.req.getSession().getAttribute("uid"));
+            int userId = Integer.parseInt(String.valueOf(ctx.req.getSession().getAttribute("uid")));
 
-            User u = new User();
-            u.setUser_id(userId);
+//            User u = new User();
+//            u.setUser_id(userId);
+
+                Banking bds = new Banking();
+                bds.setUsers_fk(userId);
 
             Banking b = om.readValue(ctx.body(), Banking.class);
-            bs.addDeposit(b.getTransaction(), u);
+            bs.addDeposit(b.getBalance(), userId);
+
+            ctx.result(om.writeValueAsString("user deposited amount by " + b.getBalance()));
 
         }
     };

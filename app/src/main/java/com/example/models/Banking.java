@@ -5,25 +5,25 @@ import java.util.Date;
 public class Banking {
 
     private int transaction_id;
-    private Date transaction_date;
-    private int transaction;
+    private int balance;
+    private int prevTransaction;
 //    private User userTransaction;
-    private User users_fk;
+    private int users_fk;
 
     public Banking() {
     }
 
-    public Banking(int transaction_id, Date transaction_date, int transaction, User users_fk) {
+    public Banking(int transaction_id, int balance, int prevTransaction, int users_fk) {
         this.transaction_id = transaction_id;
-        this.transaction_date = transaction_date;
-        this.transaction = transaction;
+        this.balance = balance;
+        this.prevTransaction = prevTransaction;
         this.users_fk = users_fk;
     }
 
-    public Banking(int transaction_id, Date transaction_date, int transaction) {
+    public Banking(int transaction_id, int balance, int prevTransaction) {
         this.transaction_id = transaction_id;
-        this.transaction_date = transaction_date;
-        this.transaction = transaction;
+        this.balance = balance;
+        this.prevTransaction = prevTransaction;
     }
 
     public int getTransaction_id() {
@@ -34,37 +34,37 @@ public class Banking {
         this.transaction_id = transaction_id;
     }
 
-    public Date getTransaction_date() {
-        return transaction_date;
+    public int getBalance() {
+        return balance;
     }
 
-    public void setTransaction_date(Date transaction_date) {
-        this.transaction_date = transaction_date;
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 
-    public int getTransaction() {
-        return transaction;
+    public int getPrevTransaction() {
+        return prevTransaction;
     }
 
-    public void setTransaction(int transaction) {
-        this.transaction = transaction;
+    public void setPrevTransaction(int prevTransaction) {
+        this.prevTransaction = prevTransaction;
     }
 
-    public User getUserTransaction() {
+    public int getUsers_fk() {
         return users_fk;
     }
 
-    public void setUserTransaction(User users_fk) {
+    public void setUsers_fk(int users_fk) {
         this.users_fk = users_fk;
     }
 
     @Override
     public String toString() {
-        return "BankingTransaction{" +
+        return "Banking{" +
                 "transaction_id=" + transaction_id +
-                ", transaction_date=" + transaction_date +
-                ", transaction=" + transaction +
-                ", userTransaction=" + users_fk +
+                ", balance=" + balance +
+                ", prevTransaction=" + prevTransaction +
+                ", users_fk=" + users_fk +
                 '}';
     }
 }
