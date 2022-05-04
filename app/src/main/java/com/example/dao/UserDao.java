@@ -18,8 +18,8 @@ public class UserDao implements IUserDao {
         // create a user, we must get our connection
         Connection c = cs.getConnection();
 
-        String sql = "insert into users (firstname, lastname, email, password, type) values " +
-                    "('" + u.getFirstName() + "', '" + u.getLastName() + "', '" + u.getEmail() + "', '" + u.getPassword() + "', '" +  u.getType() + "')";
+        String sql = "insert into users (firstname, lastname, email, password, type, approved) values " +
+                    "('" + u.getFirstName() + "', '" + u.getLastName() + "', '" + u.getEmail() + "', '" + u.getPassword() + "', '" +  u.getType() + "'," +  (Boolean) u.getApproved()  + ")";
 
         // create a statement and execute it
         try {

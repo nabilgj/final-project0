@@ -41,7 +41,7 @@ public class BankingController {
 
             Banking b = om.readValue(ctx.body(), Banking.class);
 
-            ctx.result(om.writeValueAsString("You deposited" + b.getBalance()));
+            ctx.result(om.writeValueAsString("You deposited $" + b.getBalance()));
 
         }
     };
