@@ -47,4 +47,11 @@ public class UserController {
         }
 
     };
+
+    public Handler handleUpdateUser = (ctx) -> {
+        User u = om.readValue(ctx.body(), User.class);
+        System.out.println("coming from handleUpdateUser" + u);
+
+        ctx.result(om.writeValueAsString(us.updateUserType(u)));
+    };
 }

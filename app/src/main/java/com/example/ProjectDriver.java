@@ -12,8 +12,7 @@ import io.javalin.Javalin;
 
 import java.sql.Connection;
 
-import static io.javalin.apibuilder.ApiBuilder.path;
-import static io.javalin.apibuilder.ApiBuilder.post;
+import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class ProjectDriver {
 
@@ -35,6 +34,7 @@ public class ProjectDriver {
             path("users", () -> {
                post("/register", uc.handleRegister);
                post("/login", uc.handleLogin);
+               put("/userupdate", uc.handleUpdateUser);
             });
         });
 

@@ -73,8 +73,24 @@ public class UserDao implements IUserDao {
 
     @Override
     public User updateUser(User u) {
-        return null;
+        Connection c = cs.getConnection();
 
+        String sql = "UPDATE users SET type = ? " +
+                "WHERE user_id = ?";
+
+        try {
+            PreparedStatement p = c.prepareStatement(sql);
+
+            p.setString(1, u.getType());
+            p.setInt(2, u.getUser_id());
+
+            p.execute();
+            return u;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

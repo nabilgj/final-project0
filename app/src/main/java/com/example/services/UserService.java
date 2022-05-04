@@ -39,4 +39,10 @@ public class UserService {
         // also not good user does not exist
         return null;
     }
+
+    // user update
+    public User updateUserType(User u) {
+
+        return ud.updateUser(u);
+    }
 }
