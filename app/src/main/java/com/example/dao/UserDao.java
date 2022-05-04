@@ -59,7 +59,7 @@ public class UserDao implements IUserDao {
 
             User loggedIn = null;
             while(rs.next()) {
-                loggedIn = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6) );
+                loggedIn = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7) );
             }
 
             return loggedIn;
@@ -67,7 +67,6 @@ public class UserDao implements IUserDao {
             e.printStackTrace();
             throw null;
         }
-
 
     }
 

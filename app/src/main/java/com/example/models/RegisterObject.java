@@ -8,6 +8,10 @@ public class RegisterObject {
     public String password;
     public String type;
 
+    public String approved;
+
+
+
     @Override
     public String toString() {
         return "RegisterObject{" +
@@ -16,6 +20,7 @@ public class RegisterObject {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", type='" + type + '\'' +
+                ", approved='" + approved + '\'' +
                 '}';
     }
 }

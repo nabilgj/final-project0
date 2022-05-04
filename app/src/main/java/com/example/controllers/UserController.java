@@ -25,7 +25,7 @@ public class UserController {
         RegisterObject ro = om.readValue(ctx.body(), RegisterObject.class);
         System.out.println(ro);
 
-        us.registerUser(ro.firstName, ro.lastName, ro.email, ro.password, ro.type);
+        us.registerUser(ro.firstName, ro.lastName, ro.email, ro.password, ro.type, ro.approved);
 
         ctx.status(201);
         ctx.result("user registered as " + ro.firstName);
@@ -42,7 +42,10 @@ public class UserController {
             ctx.result("Username or password is incorrect");
         } else {
             // we could also, if the user is logged in successfully, setup a session for them
-            ctx.req.getSession().setAttribute("uid", ""+u.getEmail());
+            ctx.req.getSession().setAttribute("loggedIn", u.getEmail());
+            ctx.req.getSession().setAttribute("uid", ""+u.getUser_id());
+
+
             ctx.result(om.writeValueAsString("user logged in by " + u.getEmail()));
         }
 

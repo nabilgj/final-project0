@@ -13,6 +13,8 @@ public class User {
     private String password;
     private String type;
 
+    private boolean approved;
+
     private Set<User> following;
     private Set<User> followers;
     private List<Post> posts;
@@ -20,13 +22,14 @@ public class User {
     public User() {
     }
 
-    public User(int userid, String firstname, String lastname, String email, String password, String type, Set<User> following, Set<User> follower, List<Post> posts) {
+    public User(int userid, String firstname, String lastname, String email, String password, String type, Boolean approved, Set<User> following, Set<User> follower, List<Post> posts) {
         this.userId = userid;
         this.firstName = firstname;
         this.lastName = lastname;
         this.email = email;
         this.password = password;
         this.type = type;
+        this.approved = approved;
         this.following = following;
         this.followers = follower;
         this.posts = posts;
@@ -34,13 +37,14 @@ public class User {
 
     // a special contructor for use in the dao
 
-    public User(int user_id, String firstname, String lastname, String email, String password, String type) {
+    public User(int user_id, String firstname, String lastname, String email, String password, String type, Boolean approved) {
         this.userId = user_id;
         this.firstName = firstname;
         this.lastName = lastname;
         this.email = email;
         this.password = password;
         this.type = type;
+        this.approved = approved;
 
         this.followers = new HashSet<>();
         this.following = new HashSet<>();
@@ -97,6 +101,12 @@ public class User {
         this.type = type;
     }
 
+    public Boolean getApproved() { return approved; }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
+    }
+
     public Set<User> getFollowing() {
         return following;
     }
@@ -132,6 +142,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", type='" + type + '\'' +
+                ", approved='" + approved + '\'' +
                 ", following=" + following +
                 ", followers=" + followers +
                 ", posts=" + posts +

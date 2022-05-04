@@ -3,9 +3,13 @@
  */
 package com.example;
 
+import com.example.controllers.BankingController;
 import com.example.controllers.UserController;
+import com.example.dao.BankingDao;
+import com.example.dao.IBankingDao;
 import com.example.dao.IUserDao;
 import com.example.dao.UserDao;
+import com.example.services.BankingService;
 import com.example.services.UserService;
 import com.example.util.ConnectionSingleton;
 import io.javalin.Javalin;
@@ -24,6 +28,10 @@ public class ProjectDriver {
         // this is constructor call for Controller that handles http handler
         UserController uc = new UserController(us);
 
+        IBankingDao bd = new BankingDao();
+        BankingService bs = new BankingService(bd);
+        BankingController bc = new BankingController(bs);
+
         Javalin app = Javalin.create(config -> {
             config.enableCorsForAllOrigins();
         });
@@ -36,6 +44,9 @@ public class ProjectDriver {
                post("/login", uc.handleLogin);
                put("/userupdate", uc.handleUpdateUser);
                delete("/userdelete/{id}", uc.handleDeleteUser);
+            });
+            path("banks", () -> {
+                post("/", bc.handleDepositAmount);
             });
         });
 
