@@ -95,6 +95,18 @@ public class UserDao implements IUserDao {
 
     @Override
     public void deleteUser(User u) {
+        Connection c = cs.getConnection();
+
+        String sql = "DELETE FROM users WHERE user_id= ?";
+
+        try {
+            PreparedStatement p = c.prepareStatement(sql);
+
+            p.setInt(1, u.getUser_id());
+            p.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 }

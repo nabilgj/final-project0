@@ -54,4 +54,15 @@ public class UserController {
 
         ctx.result(om.writeValueAsString(us.updateUserType(u)));
     };
+
+    public Handler handleDeleteUser = (ctx) -> {
+        int id = Integer.parseInt(ctx.pathParam("id"));
+        User u = new User();
+        u.setUser_id(id);
+
+        // coming from service
+        us.deleteUser(u);
+
+        ctx.result("User deleted");
+    };
 }

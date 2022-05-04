@@ -35,6 +35,7 @@ public class ProjectDriver {
                post("/register", uc.handleRegister);
                post("/login", uc.handleLogin);
                put("/userupdate", uc.handleUpdateUser);
+               delete("/userdelete/{id}", uc.handleDeleteUser);
             });
         });
 

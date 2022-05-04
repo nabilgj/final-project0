@@ -45,4 +45,8 @@ public class UserService {
 
         return ud.updateUser(u);
     }
+
+    public void deleteUser(User u) {
+        ud.deleteUser(u);
+    }
 }
