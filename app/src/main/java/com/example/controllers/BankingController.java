@@ -1,6 +1,8 @@
 package com.example.controllers;
 
 import com.example.models.Banking;
+import com.example.models.DepositObject;
+import com.example.models.RegisterObject;
 import com.example.models.User;
 import com.example.services.BankingService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,6 +21,9 @@ public class BankingController {
 
     public Handler handleDepositAmount = (ctx) -> {
 
+        DepositObject dObj = om.readValue(ctx.body(), DepositObject.class);
+        System.out.println(dObj);
+
         // 1st check to see if the usr already logged in
         if (ctx.req.getSession().getAttribute("uid") == null) {
             ctx.status(401);
@@ -26,16 +31,17 @@ public class BankingController {
         } else {
             int userId = Integer.parseInt(String.valueOf(ctx.req.getSession().getAttribute("uid")));
 
+            bs.addDeposit(dObj.balance, dObj.prevTransaction, userId);
+
 //            User u = new User();
 //            u.setUser_id(userId);
 
-                Banking bds = new Banking();
-                bds.setUsers_fk(userId);
+            Banking bds = new Banking();
+            bds.setUsers_fk(userId);
 
             Banking b = om.readValue(ctx.body(), Banking.class);
-            bs.addDeposit(b.getBalance(), userId);
 
-            ctx.result(om.writeValueAsString("user deposited amount by " + b.getBalance()));
+            ctx.result(om.writeValueAsString("You deposited" + b.getBalance()));
 
         }
     };

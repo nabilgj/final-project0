@@ -15,12 +15,16 @@ public class BankingService {
        this.bd = bd;
    }
 
-   public void addDeposit(int amount, int id){
+//   Banking Controller
+   public void addDeposit(int amount, int prevTransaction, int id){
       Banking bank = new Banking();
 
-      if (amount != 0) {
-         Banking deposit = new Banking(0, amount, bank.getBalance() + amount, id);
-         bank.setPrevTransaction(amount);
+      if (amount > 0) {
+         Banking deposit = new Banking(0, amount, prevTransaction, id);
+         bd.depositAmount(deposit);
+//         bank.setPrevTransaction(amount);
+      } else {
+         System.out.println("Cant deposit negative amount");
       }
 
    }
