@@ -31,17 +31,19 @@ public class BankingController {
         } else {
             int userId = Integer.parseInt(String.valueOf(ctx.req.getSession().getAttribute("uid")));
 
-            bs.addDeposit(dObj.balance, dObj.prevTransaction, userId);
+            if (dObj.balance < 0) {
+                ctx.status(403);
+                ctx.result("You can no deposit any amount below Zero - Zero is just for project0");
+            } else {
+                bs.addDeposit(dObj.balance, dObj.prevTransaction, userId);
+                System.out.println(bs);
 
-//            User u = new User();
-//            u.setUser_id(userId);
+                Banking bds = new Banking();
+                bds.setUsers_fk(userId);
 
-            Banking bds = new Banking();
-            bds.setUsers_fk(userId);
-
-            Banking b = om.readValue(ctx.body(), Banking.class);
-
-            ctx.result(om.writeValueAsString("You deposited $" + b.getBalance()));
+                Banking b = om.readValue(ctx.body(), Banking.class);
+                ctx.result(om.writeValueAsString("You deposited $" + b.getBalance()));
+            }
 
         }
     };

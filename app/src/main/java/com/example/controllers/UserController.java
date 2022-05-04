@@ -46,11 +46,7 @@ public class UserController {
             ctx.req.getSession().setAttribute("loggedIn", u.getEmail());
             ctx.req.getSession().setAttribute("uid", ""+u.getUser_id());
 
-//            Banking bank = new Banking();
-//            bank.setUsers_fk(u.getUser_id());
-
-
-            ctx.result(om.writeValueAsString("user logged in by " + u.getEmail()));
+            ctx.result(om.writeValueAsString("Welcome to Revature Bank " + u.getEmail()));
         }
 
     };
