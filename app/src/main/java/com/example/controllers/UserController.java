@@ -30,7 +30,7 @@ public class UserController {
         us.registerUser(ro.firstName, ro.lastName, ro.email, ro.password, ro.type, ro.approved);
 
         ctx.status(201);
-        ctx.result("user registered as " + ro.firstName);
+        ctx.result("Bank Account Registered with " + ro.email);
     };
 
     public Handler handleLogin = (ctx) -> {
@@ -54,15 +54,15 @@ public class UserController {
     };
 
     public Handler handleAllUsers = (ctx) -> {
-        RegisterObject ro = om.readValue(ctx.body(), RegisterObject.class);
+//        RegisterObject ro = om.readValue(ctx.body(), RegisterObject.class);
         String userType = ctx.queryParam("type");
-        System.out.println(userType);
+        System.out.println("handle login line 60 handleAllUsers " + userType);
 
         // this is coming from
         us.getAllUsers(userType);
 
-        ctx.status(201);
-        ctx.result("All users " + ro);
+        ctx.status(200);
+        ctx.result("All users " + us.getAllUsers(userType));
     };
 
     public Handler handleUpdateUser = (ctx) -> {

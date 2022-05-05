@@ -34,15 +34,16 @@ public class UserDao implements IUserDao {
 
     // used in UserService inside
     @Override
-    public User readAllUsers(User u) {
+    public User readAllUsers(String type) {
 
         Connection c = cs.getConnection();
         // sql
-        String sql = "select * FROM users where type = ?";
+        String sql = "select * FROM users WHERE type = ?";
+        System.out.println("coming from line 42 readAllUsers " + sql);
 
         try {
             PreparedStatement ps = c.prepareStatement(sql);
-            ps.setString(1, u.getType());
+            ps.setString(1, type);
 
             // we use executeQuery bcox select returns data
             ResultSet rs = ps.executeQuery();
@@ -51,6 +52,7 @@ public class UserDao implements IUserDao {
             User users = null;
             while(rs.next()) {
                 users = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7) );
+                System.out.println("coming from line 55 readAllUsers " + users);
             }
             return users;
 

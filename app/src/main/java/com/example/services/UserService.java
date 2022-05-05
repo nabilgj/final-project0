@@ -40,9 +40,10 @@ public class UserService {
         return null;
     }
 
-    public User getAllUsers(String email) {
-        User u = new User();
-        User us = ud.readAllUsers(u);
+    public User getAllUsers(String type) {
+        User us = ud.readAllUsers(type);
+
+        System.out.println("coming from line 47 readAllUsers " + us);
 
         if (us != null) {
             return us;
@@ -51,7 +52,7 @@ public class UserService {
         }
 
         // also not good user does not exist
-//        return null;
+//        return us;
     }
 
     // user update
