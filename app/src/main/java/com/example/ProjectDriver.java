@@ -47,6 +47,8 @@ public class ProjectDriver {
             });
             path("banks", () -> {
                 post("/deposit", bc.handleDepositAmount);
+                post("/withdraw", bc.handleWithDraw);
+                post("/show", bc.handleAllAccounts);
             });
         });
 
