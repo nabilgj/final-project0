@@ -19,7 +19,7 @@ public class UserDao implements IUserDao {
         Connection c = cs.getConnection();
 
         String sql = "insert into users (firstname, lastname, email, password, type, approved) values " +
-                    "('" + u.getFirstName() + "', '" + u.getLastName() + "', '" + u.getEmail() + "', '" + u.getPassword() + "', '" +  u.getType() + "'," +  (Boolean) u.getApproved()  + ")";
+                    "('" + u.getFirstName() + "', '" + u.getLastName() + "', '" + u.getEmail() + "', '" + u.getPassword() + "', '" +  u.getType() + "', '" +  u.getApproved()  + "')";
 
         // create a statement and execute it
         try {
@@ -30,8 +30,6 @@ public class UserDao implements IUserDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
     // used in UserService inside
@@ -56,18 +54,16 @@ public class UserDao implements IUserDao {
             ResultSet rs = ps.executeQuery();
 
             // now loop through resultSet
-
             User loggedIn = null;
             while(rs.next()) {
-                loggedIn = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7) );
+                loggedIn = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7) );
             }
-
             return loggedIn;
+
         } catch (SQLException e) {
             e.printStackTrace();
             throw null;
         }
-
     }
 
     @Override

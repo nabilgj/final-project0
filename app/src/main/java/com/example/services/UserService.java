@@ -14,10 +14,9 @@ public class UserService {
     }
 
     // we register a user when we create a new user using models constructor
-    // used in main via accessing from postman
     // called inside UserController
     public void registerUser(String first, String last, String email, String password, String type, String approved){
-        User register = new User(0, first, last, email, password, type, true);
+        User register = new User(0, first, last, email, password, type, approved);
         ud.createUser(register);
     }
 
@@ -25,6 +24,7 @@ public class UserService {
     public User loginUser(String email, String password) {
         // try to see if user exists in db with email
         User u = ud.readUserByEmail(email);
+
         if (u != null) {
             // now check password
             if(password.equals(u.getPassword())) {

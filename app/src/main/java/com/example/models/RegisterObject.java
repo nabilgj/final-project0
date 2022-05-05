@@ -7,7 +7,6 @@ public class RegisterObject {
     public String email;
     public String password;
     public String type;
-
     public String approved;
 
 

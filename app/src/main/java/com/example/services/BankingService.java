@@ -16,17 +16,17 @@ public class BankingService {
    }
 
 
-   public void addDeposit(int amount, int prevTransaction, int id){
+   public void addDeposit(int amount, int balance, int id){
 
       Banking bank = new Banking();
 
       if (amount > 0) {
-         Banking deposit = new Banking(0, amount, prevTransaction, id);
+         Banking deposit = new Banking(0, amount, balance, id);
 
-         bd.depositAmount(deposit);
+         bd.depositIntoAccount(deposit);
 
          // here balance is zero
-         System.out.println("this is prevBal " + deposit.getPrevTransaction());
+         System.out.println("this is prevBal " + deposit.getDepositamount());
       } else {
          System.out.println("Cant deposit negative amount");
       }

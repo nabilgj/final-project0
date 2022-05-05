@@ -5,32 +5,31 @@ import java.util.Date;
 public class Banking {
 
     private int transaction_id;
+    private int depositamount;
     private int balance;
-    private int prevTransaction;
 //    private User userTransaction;
     private int users_fk;
 
     public Banking() {
     }
 
-    public Banking(int transaction_id, int balance, int prevTransaction, int users_fk) {
+    public Banking(int transaction_id, int depositamount) {
         this.transaction_id = transaction_id;
+        this.depositamount = depositamount;
+    }
+
+    public Banking(int transaction_id, int depositamount, int balance) {
+        this.transaction_id = transaction_id;
+        this.depositamount = depositamount;
         this.balance = balance;
-        this.prevTransaction = prevTransaction;
+    }
+
+    public Banking(int transaction_id, int depositamount, int balance, int users_fk) {
+        this.transaction_id = transaction_id;
+        this.depositamount = depositamount;
+        this.balance = balance;
         this.users_fk = users_fk;
     }
-
-    public Banking(int transaction_id, int balance) {
-        this.transaction_id = transaction_id;
-        this.balance = balance;
-    }
-
-    public Banking(int transaction_id, int balance, int prevTransaction) {
-        this.transaction_id = transaction_id;
-        this.balance = balance;
-        this.prevTransaction = prevTransaction;
-    }
-
 
 
     public int getTransaction_id() {
@@ -41,20 +40,20 @@ public class Banking {
         this.transaction_id = transaction_id;
     }
 
+    public int getDepositamount() {
+        return depositamount;
+    }
+
+    public void setDepositamount(int depositamount) {
+        this.depositamount = depositamount;
+    }
+
     public int getBalance() {
         return balance;
     }
 
     public void setBalance(int balance) {
         this.balance = balance;
-    }
-
-    public int getPrevTransaction() {
-        return prevTransaction;
-    }
-
-    public void setPrevTransaction(int prevTransaction) {
-        this.prevTransaction = prevTransaction;
     }
 
     public int getUsers_fk() {
@@ -69,8 +68,8 @@ public class Banking {
     public String toString() {
         return "Banking{" +
                 "transaction_id=" + transaction_id +
+                ", depositamount=" + depositamount +
                 ", balance=" + balance +
-                ", prevTransaction=" + prevTransaction +
                 ", users_fk=" + users_fk +
                 '}';
     }

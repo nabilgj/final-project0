@@ -13,31 +13,27 @@ public class User {
     private String password;
     private String type;
 
-    private boolean approved;
-
-    private Set<User> following;
-    private Set<User> followers;
-    private List<Post> posts;
+    private String approved;
 
     public User() {
     }
 
-    public User(int userid, String firstname, String lastname, String email, String password, String type, Boolean approved, Set<User> following, Set<User> follower, List<Post> posts) {
+    public User(String approved) {
+        this.approved = approved;
+    }
+
+    public User(int userid, String firstname, String lastname, String email, String password, String type) {
         this.userId = userid;
         this.firstName = firstname;
         this.lastName = lastname;
         this.email = email;
         this.password = password;
         this.type = type;
-        this.approved = approved;
-        this.following = following;
-        this.followers = follower;
-        this.posts = posts;
     }
 
     // a special contructor for use in the dao
 
-    public User(int user_id, String firstname, String lastname, String email, String password, String type, Boolean approved) {
+    public User(int user_id, String firstname, String lastname, String email, String password, String type, String approved) {
         this.userId = user_id;
         this.firstName = firstname;
         this.lastName = lastname;
@@ -45,10 +41,6 @@ public class User {
         this.password = password;
         this.type = type;
         this.approved = approved;
-
-        this.followers = new HashSet<>();
-        this.following = new HashSet<>();
-        this.posts = new ArrayList<>();
     }
 
     // getters and setters
@@ -101,35 +93,13 @@ public class User {
         this.type = type;
     }
 
-    public Boolean getApproved() { return approved; }
+    public String getApproved() { return approved; }
 
-    public void setApproved(Boolean approved) {
+    public void setApproved(String approved) {
         this.approved = approved;
     }
 
-    public Set<User> getFollowing() {
-        return following;
-    }
 
-    public void setFollowing(Set<User> following) {
-        this.following = following;
-    }
-
-    public Set<User> getFollowers() {
-        return followers;
-    }
-
-    public void setFollowers(Set<User> followers) {
-        this.followers = followers;
-    }
-
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
 
     // toString
 
@@ -143,9 +113,6 @@ public class User {
                 ", password='" + password + '\'' +
                 ", type='" + type + '\'' +
                 ", approved='" + approved + '\'' +
-                ", following=" + following +
-                ", followers=" + followers +
-                ", posts=" + posts +
                 '}';
     }
 }

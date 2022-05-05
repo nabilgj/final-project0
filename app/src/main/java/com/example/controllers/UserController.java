@@ -18,14 +18,15 @@ public class UserController {
     public UserController(UserService us){
         this.us = us;
         this.om = new ObjectMapper();
+
     }
 
-    // handlers for REST
-    // implementation for handler method in main method
+
     public Handler handleRegister = (ctx) -> {
         RegisterObject ro = om.readValue(ctx.body(), RegisterObject.class);
         System.out.println(ro);
 
+        // this is coming from
         us.registerUser(ro.firstName, ro.lastName, ro.email, ro.password, ro.type, ro.approved);
 
         ctx.status(201);
@@ -34,9 +35,9 @@ public class UserController {
 
     public Handler handleLogin = (ctx) -> {
         LoginObjet lo = om.readValue(ctx.body(), LoginObjet.class);
-        System.out.println("user logged in by " + lo.email);
-
         User u = us.loginUser(lo.email, lo.password);
+
+        System.out.println("handle login line 41 " + u.getApproved());
 
         if (u == null) {
             ctx.status(403);
@@ -47,7 +48,9 @@ public class UserController {
             ctx.req.getSession().setAttribute("uid", ""+u.getUser_id());
 
             ctx.result(om.writeValueAsString("Welcome to Revature Bank " + u.getEmail()));
+            System.out.println("user logged in by " + lo.email);
         }
+
 
     };
 
