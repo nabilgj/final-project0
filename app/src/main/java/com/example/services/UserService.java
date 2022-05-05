@@ -40,6 +40,20 @@ public class UserService {
         return null;
     }
 
+    public User getAllUsers(String email) {
+        User u = new User();
+        User us = ud.readAllUsers(u);
+
+        if (us != null) {
+            return us;
+        } else {
+            return null;
+        }
+
+        // also not good user does not exist
+//        return null;
+    }
+
     // user update
     public User updateUserType(User u) {
 

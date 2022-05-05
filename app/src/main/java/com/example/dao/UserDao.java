@@ -34,8 +34,31 @@ public class UserDao implements IUserDao {
 
     // used in UserService inside
     @Override
-    public List<User> readAllUsers() {
-        return null;
+    public User readAllUsers(User u) {
+
+        Connection c = cs.getConnection();
+        // sql
+        String sql = "select * FROM users where type = ?";
+
+        try {
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setString(1, u.getType());
+
+            // we use executeQuery bcox select returns data
+            ResultSet rs = ps.executeQuery();
+
+            // now loop through resultSet
+            User users = null;
+            while(rs.next()) {
+                users = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7) );
+            }
+            return users;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw null;
+        }
+
     }
 
     @Override

@@ -28,17 +28,25 @@ public class BankingDao implements IBankingDao {
     }
 
     @Override
-    public void withdrawAmount(Banking b) {
+    public Banking withdrawAmount(Banking b) {
         Connection c = cs.getConnection();
-        String sql = "select * from banking";
-        System.out.println("coming from withdrawAmount " + sql);
+        String sql = "select * from banking b where b.users_fk = " + b.getUsers_fk();
+        System.out.println("coming from line 35 inside withdrawAmount " + sql);
 
         try {
             Statement s = c.createStatement();
-            s.execute(sql);
+            ResultSet res = s.executeQuery(sql);
+
+            while(res.next()) {
+                System.out.println("coming from line 42 checkAccounts " + res);
+                Banking ba = new Banking(res.getInt("transaction_id"), res.getInt("depositamount"), res.getInt("balance"), res.getInt("users_fk"));
+                System.out.println("coming from line 44 withdrawAmount " + ba);
+                return ba;
+            }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+        return null;
     }
 
     @Override

@@ -13,9 +13,13 @@ public class Banking {
     public Banking() {
     }
 
-    public Banking(int transaction_id, int depositamount) {
-        this.transaction_id = transaction_id;
+    public Banking(int depositamount, int users_fk) {
+        this.users_fk = users_fk;
         this.depositamount = depositamount;
+    }
+
+    public Banking(int balance) {
+        this.balance = balance;
     }
 
     public Banking(int transaction_id, int depositamount, int balance) {

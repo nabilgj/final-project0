@@ -51,7 +51,18 @@ public class UserController {
             System.out.println("user logged in by " + lo.email);
         }
 
+    };
 
+    public Handler handleAllUsers = (ctx) -> {
+        RegisterObject ro = om.readValue(ctx.body(), RegisterObject.class);
+        String userType = ctx.queryParam("type");
+        System.out.println(userType);
+
+        // this is coming from
+        us.getAllUsers(userType);
+
+        ctx.status(201);
+        ctx.result("All users " + ro);
     };
 
     public Handler handleUpdateUser = (ctx) -> {

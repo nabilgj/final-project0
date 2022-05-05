@@ -36,23 +36,24 @@ public class BankingService {
 
    }
 
-   public void deductAccount(int amount, int balance, int id){
+   public void deductAccount(int amount, int id){
+      Banking ba = new Banking();
 
-      Banking bank = new Banking();
 
-      if (amount > 0) {
-         Banking deposit = new Banking(0, amount, balance, id);
-         bd.withdrawAmount(deposit);
+      if (ba.getBalance() > amount) {
+         int newAmount = ba.getDepositamount();
+         int newBalance = ba.getBalance() - newAmount;
+
+         Banking bal = new Banking(0, newBalance, id);
+         bd.withdrawAmount(bal);
 
          // here balance is zero
 
       } else {
-         System.out.println("Cant withdraw negative amount");
+         System.out.println("Sorry! you do not have enough amount");
       }
 
    }
-
-
 
    public Accounts seeAccounts(int id) {
       Accounts au = bd.checkAccounts(id);

@@ -10,7 +10,7 @@ public interface IUserDao {
     // implemented inside UserDao
     public void createUser(User u);
 
-    public List<User> readAllUsers();
+    public User readAllUsers(User u);
 
     public User readUserByEmail(String email);
 

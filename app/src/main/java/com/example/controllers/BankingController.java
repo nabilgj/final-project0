@@ -54,32 +54,35 @@ public class BankingController {
         }
     };
 
-    public Handler handleWithDraw = (ctx) -> {
+    public Handler handleWithDrawl = (ctx) -> {
         DepositObject dobj = om.readValue(ctx.body(), DepositObject.class);
+        int userId = Integer.parseInt(String.valueOf(ctx.req.getSession().getAttribute("uid")));
+        Banking newB = new Banking(dobj.depositamount, userId);
 
-        int prevBalance = 0;
+        int newBalance = newB.getBalance() - dobj.depositamount;
+        System.out.println("coming from line 63 inside handleWithDrawl " + newB);
+        System.out.println("coming from line 64 inside handleWithDrawl " + newBalance);
 
         // 1st check to see if the usr already logged in
         if (ctx.req.getSession().getAttribute("uid") == null) {
             ctx.status(401);
-            ctx.result("You need to log in to your RevatureBank Account to deposit");
+            ctx.result("You need to log in to your RevatureBank Account to withdraw");
         } else {
-            int userId = Integer.parseInt(String.valueOf(ctx.req.getSession().getAttribute("uid")));
 
-            if (dobj.depositamount < 0) {
+            if (newB.getDepositamount() < 0) {
                 ctx.status(403);
-                ctx.result("Oops! you can not deposit any amount below zero");
+                ctx.result("Oops! you do not have sufficient balance.");
             } else {
                 Banking bds = new Banking();
                 bds.setUsers_fk(userId);
 
-                if(bds.getUsers_fk() == userId && bds.getBalance() != prevBalance) {
-                    bs.deductAccount(dobj.depositamount, prevBalance, userId);
-                    bds.setBalance(prevBalance);
+                if(bds.getUsers_fk() == userId && bds.getBalance() != newBalance) {
+                    bs.deductAccount(dobj.depositamount, userId);
+                    bds.setBalance(newBalance);
                 }
 
                 Banking b = om.readValue(ctx.body(), Banking.class);
-                ctx.result(om.writeValueAsString("You deposited $" + b.getDepositamount()));
+                ctx.result(om.writeValueAsString("You withdraw $" + dobj.depositamount));
             }
         }
     };

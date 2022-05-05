@@ -40,6 +40,7 @@ public class ProjectDriver {
         // controller handles logic for api request for implementation
         app.routes(() -> {
             path("users", () -> {
+               get("/", uc.handleAllUsers);
                post("/register", uc.handleRegister);
                post("/login", uc.handleLogin);
                put("/userupdate", uc.handleUpdateUser);
@@ -47,7 +48,7 @@ public class ProjectDriver {
             });
             path("banks", () -> {
                 post("/deposit", bc.handleDepositAmount);
-                post("/withdraw", bc.handleWithDraw);
+                post("/withdraw", bc.handleWithDrawl);
                 post("/show", bc.handleAllAccounts);
             });
         });
