@@ -13,7 +13,6 @@ public class BankingDao implements IBankingDao {
     @Override
     public void depositAmount(Banking b) {
         Connection c = cs.getConnection();
-
         String sql = "insert into banking(balance, prevTransaction, users_fk) values " +
                 "('" + b.getBalance() + "', '" + b.getPrevTransaction() + "', '" + b.getUsers_fk() + "')";
 
@@ -25,8 +24,6 @@ public class BankingDao implements IBankingDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
     @Override
